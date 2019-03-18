@@ -1,8 +1,9 @@
 /**
-* Package for calculator class test.
-*
-* @author Шавва Максим (masyam@mail.ru)
-* @version 1
-* @since 0.1
-*/
+ * Пакет содержит тесты для класса простейшего калькулятора,
+ * класс калькулятора идеального веса человека.
+ *
+ * @author Шавва Максим (masyam@mail.ru)
+ * @version 1
+ * @since 0.1
+ */
 package ru.job4j.calculator;
