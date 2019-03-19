@@ -4,5 +4,6 @@
  * DummyBotTest для DummyBot.
  * MaxText для Max.
  * TriangleTest для Triangle.
+ * MultiMaxTest для MultiMax.
  * */
 package ru.job4j.condition;
