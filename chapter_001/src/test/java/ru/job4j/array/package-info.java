@@ -6,5 +6,6 @@
  * CheckTest для Check.
  * ArrayCharTest для ArrayChar.
  * BubbleSortTest для BubbleSort.
+ * MatrixTest для Matrix.
  * */
 package ru.job4j.array;
