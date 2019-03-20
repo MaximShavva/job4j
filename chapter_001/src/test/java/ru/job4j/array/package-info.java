@@ -4,5 +4,6 @@
  * FindLoopTest для FindLoop.
  * TurnTest для Turn.
  * CheckTest для Check.
+ * ArrayCharTest для ArrayChar.
  * */
 package ru.job4j.array;
