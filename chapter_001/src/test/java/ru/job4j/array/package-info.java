@@ -8,5 +8,6 @@
  * BubbleSortTest для BubbleSort.
  * MatrixTest для Matrix.
  * MatrixCheckTest для Matrix.
- * */
+ * ArrayDuplicateTest для ArrayDuplicate.
+ */
 package ru.job4j.array;
