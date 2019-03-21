@@ -78,28 +78,36 @@ public class Logic {
         for (int i = 0; i < table.length; i++) {
             if (table[i][0] == 1) {
                 for (int j = 0; j < table[i].length; j++) {
-                    if (table[i][j] == 1) result = true;
-                    else {
+                    if (table[i][j] == 1) {
+                        result = true;
+                    } else {
                         result = false;
                         break;
                     }
                 }
             }
-            if (result == true) break;
+            if (result) {
+                break;
+            }
         }
-        if (result == true) return result;
+        if (result) {
+            return result;
+        }
         //проверяем горизонталь:
         for (int i = 0; i < table.length; i++) {
             if (table[0][i] == 1) {
                 for (int j = 0; j < table[i].length; j++) {
-                    if (table[j][i] == 1) result = true;
-                    else {
+                    if (table[j][i] == 1) {
+                        result = true;
+                    } else {
                         result = false;
                         break;
                     }
                 }
             }
-            if (result == true) break;
+            if (result) {
+                break;
+            }
         }
         return result;
     }
