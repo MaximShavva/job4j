@@ -16,20 +16,20 @@ public class ArrayDuplicate {
      * @return Очищеный от дубликатов массив.
      */
     public String[] remove(String[] array) {
-        int lastIndex = array.length - 1;
-        for (int i = 0; i < lastIndex; i++) {
+        int last = array.length - 1;
+        for (int i = 0; i < last; i++) {
             String item = array[i];
-            for (int j = i + 1; j <= lastIndex; j++) {
+            for (int j = i + 1; j <= last; j++) {
                 if (array[j].equals(item)) {
-                    if (j == lastIndex) {
-                        lastIndex--;
+                    if (j == last) {
+                        last--;
                     } else {
-                        array[j] = array[lastIndex];
-                        lastIndex--;
+                        array[j] = array[last];
+                        last--;
                     }
                 }
             }
         }
-        return Arrays.copyOf(array, lastIndex + 1);
+        return Arrays.copyOf(array, last + 1);
     }
 }

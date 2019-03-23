@@ -18,10 +18,8 @@ public class MatrixCheck {
         int size = data.length - 1;
         int reference;
         if (size % 2 == 0) {
-            //диагонали пересекаются
             reference = 0;
         } else {
-            //диагонали не пересекаются
             reference = size;
         }
         for (int i = 0; i <= size; i++) {

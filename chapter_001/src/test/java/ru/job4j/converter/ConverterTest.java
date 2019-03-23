@@ -19,8 +19,8 @@ public class ConverterTest {
      */
     @Test
     public void when60RubleToDollarThen1() {
-        Converter converter = new Converter();
-        int result = converter.rubleToDollar(60);
+        Converter toilet = new Converter();
+        int result = toilet.rubleToDollar(60);
         assertThat(result, is(1));
     }
 
@@ -29,8 +29,8 @@ public class ConverterTest {
      */
     @Test
     public void when70RubleToEuroThen1() {
-        Converter converter = new Converter();
-        int result = converter.rubleToEuro(70);
+        Converter toilet = new Converter();
+        int result = toilet.rubleToEuro(70);
         assertThat(result, is(1));
     }
 
@@ -39,8 +39,8 @@ public class ConverterTest {
      */
     @Test
     public void whenDollarToRublesThen60() {
-        Converter converter = new Converter();
-        int result = converter.dollarToRuble(1);
+        Converter toilet = new Converter();
+        int result = toilet.dollarToRuble(1);
         assertThat(result, is(60));
     }
 
@@ -49,8 +49,8 @@ public class ConverterTest {
      */
     @Test
     public void whenEuroToRublesThen70() {
-        Converter converter = new Converter();
-        int result = converter.euroToRuble(1);
+        Converter toilet = new Converter();
+        int result = toilet.euroToRuble(1);
         assertThat(result, is(70));
     }
 }

@@ -25,6 +25,10 @@ public class Puzzle extends Application {
     private final int size = 5;
     private final Logic logic = new Logic(size);
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     private Rectangle buildRectangle(int x, int y, int size) {
         Rectangle rect = new Rectangle();
         rect.setX(x * size);

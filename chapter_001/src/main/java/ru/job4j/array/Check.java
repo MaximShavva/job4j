@@ -15,9 +15,9 @@ public class Check {
      */
     public boolean mono(boolean[] data) {
         boolean result = true;
-        boolean curData = data[0];
-        for (boolean itemData : data) {
-            if (curData != itemData) {
+        boolean current = data[0];
+        for (boolean item : data) {
+            if (current != item) {
                 result = false;
                 break;
             }

@@ -30,11 +30,11 @@ public class Paint {
      * @return треугольник.
      */
     public String leftTrl(int height) {
-        int minorHeight = height - 1;
+        int minor = height - 1;
         return this.loopBy(
                 height,
                 height,
-                (row, column) -> row >= minorHeight - column
+                (row, column) -> row >= minor - column
         );
     }
 
@@ -45,11 +45,11 @@ public class Paint {
      * @return пирамидка.
      */
     public String pyramid(int height) {
-        int minorHeight = height - 1;
+        int minor = height - 1;
         return this.loopBy(
                 height,
                 2 * height - 1,
-                (row, column) -> row >= minorHeight - column && row >= column - minorHeight
+                (row, column) -> row >= minor - column && row >= column - minor
         );
     }
 
