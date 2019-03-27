@@ -5,8 +5,8 @@ package ru.job4j.testTask;
  * в общий отсортированный массив.
  *
  * @author Шавва Максим.
- * @version 3.
- * @since 27.03.2019г.
+ * @version 2.
+ * @since 25.03.2019г.
  */
 public class MergeArrays {
 
@@ -19,10 +19,14 @@ public class MergeArrays {
         int[] joint = new int[first.length + second.length];
         int left = 0, right = 0;
         for (int i = 0; i < joint.length; i++) {
-            if (left == first.length || (right != second.length && first[left] > second[right])) {
+            if (left == first.length) {
                 joint[i] = second[right++];
-            } else if (right == second.length || first[left] <= second[right]) {
+            } else if (right == second.length) {
                 joint[i] = first[left++];
+            } else if (first[left] <= second[right]) {
+                joint[i] = first[left++];
+            } else {
+                joint[i] = second[right++];
             }
         }
         return joint;

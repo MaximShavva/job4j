@@ -4,10 +4,13 @@ import java.util.function.BiPredicate;
 
 /**
  * Объединение 2-х отсортированных массивов в общий отсортированный массив.
+ * При этом выполняются проверки:
+ * - на неотсортированность массивов.
+ * - на несовпадение направлений сортировок.
  *
  * @author Шавва Максим.
- * @version 1.
- * @since 24.03.2019г.
+ * @version 1.1
+ * @since 27.03.2019г.
  */
 public class JointArray {
 
@@ -16,12 +19,12 @@ public class JointArray {
      * @param second Второй отсортированный массив.
      */
     public int[] arraysJoining(int[] first, int[] second) {
-        int doSort = canJoined(first, second);
-        switch (doSort) {
+        int sort = canJoined(first, second);
+        switch (sort) {
             case 1:
-                return joining(first, second, (firstItem, secondItem) -> firstItem <= secondItem);
+                return joining(first, second, (left, right) -> left <= right);
             case -1:
-                return joining(first, second, (firstItem, secondItem) -> firstItem >= secondItem);
+                return joining(first, second, (left, right) -> left >= right);
             default:
                 return new int[0];
         }
@@ -34,25 +37,13 @@ public class JointArray {
      * @return объединённый отсортированный массив.
      */
     private int[] joining(int[] first, int[] second, BiPredicate<Integer, Integer> predict) {
-        int firstLength = first.length;
-        int secondLength = second.length;
-        int[] joint = new int[firstLength + secondLength];
-        int firstCursor = 0, secondCursor = 0;
+        int[] joint = new int[first.length + second.length];
+        int left = 0, right = 0;
         for (int i = 0; i < joint.length; i++) {
-            if (firstCursor == firstLength) {
-                joint[i] = second[secondCursor];
-                secondCursor++;
-            } else if (secondCursor == secondLength) {
-                joint[i] = first[firstCursor];
-                firstCursor++;
-            } else {
-                if (predict.test(first[firstCursor], second[secondCursor])) {
-                    joint[i] = first[firstCursor];
-                    firstCursor++;
-                } else {
-                    joint[i] = second[secondCursor];
-                    secondCursor++;
-                }
+            if (left == first.length || (right != second.length && predict.test(second[right], first[left]))) {
+                joint[i] = second[right++];
+            } else if (right == second.length || predict.test(first[left], second[right])) {
+                joint[i] = first[left++];
             }
         }
         return joint;
@@ -65,15 +56,15 @@ public class JointArray {
      */
     private int canJoined(int[] first, int[] second) {
         int vector = 0;
-        int sortedFirst = verifyIfSorted(first);
-        int sortedSecond = verifyIfSorted(second);
-        if (sortedFirst == 1 && sortedSecond == 1) vector = 1;
-        if (sortedFirst == -1 && sortedSecond == -1) vector = -1;
-        if (sortedFirst == 2 && sortedSecond == 2) vector = 1;
-        if (sortedFirst == 2 && sortedSecond == 1) vector = 1;
-        if (sortedFirst == 2 && sortedSecond == -1) vector = -1;
-        if (sortedFirst == 1 && sortedSecond == 2) vector = 1;
-        if (sortedFirst == -1 && sortedSecond == 2) vector = -1;
+        int left = verifyIfSorted(first);
+        int right = verifyIfSorted(second);
+        if ((left == 1 && right == 1)
+                || (left == 2 && right == 2)
+                || (left == 2 && right == 1)
+                || (left == 1 && right == 2)) vector = 1;
+        if ((left == -1 && right == -1)
+                || (left == 2 && right == -1)
+                || (left == -1 && right == 2)) vector = -1;
         return vector;
     }
 
@@ -91,7 +82,6 @@ public class JointArray {
             boolean dec = decrease(array);
             if (inc && !dec) sorted = 1;
             if (!inc && dec) sorted = -1;
-            if (!inc && !dec) sorted = 0;
             if (inc && dec) sorted = 2;
         } else {
             sorted = 1;
