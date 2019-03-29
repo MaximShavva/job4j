@@ -150,8 +150,12 @@ public class StartUI {
         }
         String name = this.input.ask(INPUTNAME);
         String desc = this.input.ask(DESK);
-        if ("".equals(name)) name = old.getName();
-        if ("".equals(desc)) desc = old.getDecs();
+        if ("".equals(name)) {
+            name = old.getName();
+        }
+        if ("".equals(desc)) {
+            desc = old.getDecs();
+        }
         Item item = new Item(name, desc);
         if (this.tracker.replace(id, item)) {
             System.out.printf(DATA, id);

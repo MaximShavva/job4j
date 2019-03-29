@@ -18,7 +18,7 @@ public class Tracker {
      * @param item - заявка на добавление в массив
      * @return объект item cо своим id
      */
-    public Item add (Item item) {
+    public Item add(Item item) {
         item.setId(this.generateId());
         this.items[position++] = item;
         return item;
