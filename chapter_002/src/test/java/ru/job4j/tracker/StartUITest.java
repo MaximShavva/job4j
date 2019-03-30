@@ -18,14 +18,14 @@ import static org.junit.Assert.assertThat;
  * @author Шавва Максим.
  * @version 2.
  * @since 30.03.2019г.
- * */
+ */
 public class StartUITest {
     /**
-     *  Поле содержит дефолтный вывод в консоль.
+     * Поле содержит дефолтный вывод в консоль.
      */
     private final PrintStream stdout = System.out;
     /**
-     *  Поле содержит буфер для результата.
+     * Поле содержит буфер для результата.
      */
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -72,7 +72,7 @@ public class StartUITest {
         String s = new String(out.toByteArray());
         assertThat(s.contains("test2")
                 && s.contains("test desc 1")
-                && s.contains(second.getId()) , is(true));
+                && s.contains(second.getId()), is(true));
     }
 
     /**
@@ -113,7 +113,7 @@ public class StartUITest {
         String s = new String(out.toByteArray());
         assertThat(s.contains("desc1")
                 && s.contains("desc3")
-                && !s.contains("desc2") , is(true));
+                && !s.contains("desc2"), is(true));
     }
 
     /**
@@ -125,7 +125,32 @@ public class StartUITest {
         Item second = tracker.add(new Item("test2", "test desc 2"));
         Input input = new StubInput(new String[]{"4", second.getId(), "6"});
         new StartUI(input, tracker).init();
-        String s = new String(out.toByteArray());
-        assertThat(s.contains(second.getId()), is(true));
+        assertThat(new String(out.toByteArray()),
+                is(new StringBuilder()
+                        .append("Menu.").append(System.lineSeparator())
+                        .append("0. Add new Bid").append(System.lineSeparator())
+                        .append("1. Show all Bid").append(System.lineSeparator())
+                        .append("2. Edit Bid").append(System.lineSeparator())
+                        .append("3. Delete Bid").append(System.lineSeparator())
+                        .append("4. Find Bid by Id").append(System.lineSeparator())
+                        .append("5. Find Bids by name").append(System.lineSeparator())
+                        .append("6. Exit Program").append(System.lineSeparator())
+                        .append("------------ Поиск заявки по ID: --------------")
+                        .append(System.lineSeparator())
+                        .append("Заявка:         Описание:                ID:")
+                        .append(System.lineSeparator())
+                        .append("test2           test desc 2              ")
+                        .append(second.getId()).append("   ")
+                        .append(System.lineSeparator())
+                        .append("Menu.").append(System.lineSeparator())
+                        .append("0. Add new Bid").append(System.lineSeparator())
+                        .append("1. Show all Bid").append(System.lineSeparator())
+                        .append("2. Edit Bid").append(System.lineSeparator())
+                        .append("3. Delete Bid").append(System.lineSeparator())
+                        .append("4. Find Bid by Id").append(System.lineSeparator())
+                        .append("5. Find Bids by name").append(System.lineSeparator())
+                        .append("6. Exit Program").append(System.lineSeparator())
+                        .toString()));
+
     }
 }
