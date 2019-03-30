@@ -53,7 +53,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
@@ -67,7 +67,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(new Item("test1", "test desc 1"));
         Item second = tracker.add(new Item("test2", "test desc 2"));
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
         String s = new String(out.toByteArray());
         assertThat(s.contains("test2")
@@ -82,7 +82,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -94,7 +94,7 @@ public class StartUITest {
     public void whenDeleteThenTrackerHasDeleteItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "test desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.delete(item.getId()), is(false));
     }
@@ -108,7 +108,7 @@ public class StartUITest {
         tracker.add(new Item("Name", "desc1"));
         tracker.add(new Item("test1", "desc2"));
         tracker.add(new Item("Name", "desc3"));
-        Input input = new StubInput(new String[]{"5", "Name", "6"});
+        Input input = new StubInput(new String[]{"5", "Name", "y"});
         new StartUI(input, tracker).init();
         String s = new String(out.toByteArray());
         assertThat(s.contains("desc1")
@@ -123,7 +123,7 @@ public class StartUITest {
     public void whenFindBidByIDSelectThenFindBidByID() {
         Tracker tracker = new Tracker();
         Item second = tracker.add(new Item("test2", "test desc 2"));
-        Input input = new StubInput(new String[]{"4", second.getId(), "6"});
+        Input input = new StubInput(new String[]{"4", second.getId(), "y"});
         new StartUI(input, tracker).init();
         String s = new String(out.toByteArray());
         assertThat(s.contains(second.getId()), is(true));
