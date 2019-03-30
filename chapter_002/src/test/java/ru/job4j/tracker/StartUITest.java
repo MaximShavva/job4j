@@ -1,6 +1,11 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,10 +16,36 @@ import static org.junit.Assert.assertThat;
  * тесты будут написаны в следующих упражнениях.
  *
  * @author Шавва Максим.
- * @version 1.
- * @since 29.03.2019г.
+ * @version 2.
+ * @since 30.03.2019г.
  * */
 public class StartUITest {
+    /**
+     *  Поле содержит дефолтный вывод в консоль.
+     */
+    private final PrintStream stdout = System.out;
+    /**
+     *  Поле содержит буфер для результата.
+     */
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    /**
+     * Присваиваем переменной System.out поток ByteArray.
+     */
+    @Before
+    public void loadOutput() {
+        System.out.println("execute @Before");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    /**
+     * Вернём переменной System.out поток по-умолчанию.
+     */
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute @After");
+    }
 
     /**
      * Тест метода createBid().
@@ -25,6 +56,23 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
+    }
+
+    /**
+     * Тест метода showAllBids().
+     * Проверяем в тесте вывод всех полей : name, description, ID
+     */
+    @Test
+    public void whenShowAllSelectThenShowAllBids() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("test1", "test desc 1"));
+        Item second = tracker.add(new Item("test2", "test desc 2"));
+        Input input = new StubInput(new String[]{"1", "6"});
+        new StartUI(input, tracker).init();
+        String s = new String(out.toByteArray());
+        assertThat(s.contains("test2")
+                && s.contains("test desc 1")
+                && s.contains(second.getId()) , is(true));
     }
 
     /**
@@ -49,5 +97,35 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.delete(item.getId()), is(false));
+    }
+
+    /**
+     * Тест метода findBidByName().
+     */
+    @Test
+    public void whenFindBidByNameSelectThenFindBidsByName() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("Name", "desc1"));
+        tracker.add(new Item("test1", "desc2"));
+        tracker.add(new Item("Name", "desc3"));
+        Input input = new StubInput(new String[]{"5", "Name", "6"});
+        new StartUI(input, tracker).init();
+        String s = new String(out.toByteArray());
+        assertThat(s.contains("desc1")
+                && s.contains("desc3")
+                && !s.contains("desc2") , is(true));
+    }
+
+    /**
+     * Тест метода findBidByID().
+     */
+    @Test
+    public void whenFindBidByIDSelectThenFindBidByID() {
+        Tracker tracker = new Tracker();
+        Item second = tracker.add(new Item("test2", "test desc 2"));
+        Input input = new StubInput(new String[]{"4", second.getId(), "6"});
+        new StartUI(input, tracker).init();
+        String s = new String(out.toByteArray());
+        assertThat(s.contains(second.getId()), is(true));
     }
 }
