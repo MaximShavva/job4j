@@ -127,14 +127,13 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(new StringBuilder()
-                        .append("Menu.").append(System.lineSeparator())
-                        .append("0. Add new Bid").append(System.lineSeparator())
-                        .append("1. Show all Bid").append(System.lineSeparator())
-                        .append("2. Edit Bid").append(System.lineSeparator())
-                        .append("3. Delete Bid").append(System.lineSeparator())
-                        .append("4. Find Bid by Id").append(System.lineSeparator())
-                        .append("5. Find Bids by name").append(System.lineSeparator())
-                        .append("6. Exit Program").append(System.lineSeparator())
+                        .append("0. Add new item.").append(System.lineSeparator())
+                        .append("1. Show all items.").append(System.lineSeparator())
+                        .append("2. Edit item.").append(System.lineSeparator())
+                        .append("3. Delete item.").append(System.lineSeparator())
+                        .append("4. Find item by Id.").append(System.lineSeparator())
+                        .append("5. Find items by name.").append(System.lineSeparator())
+                        .append("6. Exit Program.").append(System.lineSeparator())
                         .append("------------ Поиск заявки по ID: --------------")
                         .append(System.lineSeparator())
                         .append("Заявка:         Описание:                ID:")
@@ -142,14 +141,6 @@ public class StartUITest {
                         .append("test2           test desc 2              ")
                         .append(second.getId()).append("   ")
                         .append(System.lineSeparator())
-                        .append("Menu.").append(System.lineSeparator())
-                        .append("0. Add new Bid").append(System.lineSeparator())
-                        .append("1. Show all Bid").append(System.lineSeparator())
-                        .append("2. Edit Bid").append(System.lineSeparator())
-                        .append("3. Delete Bid").append(System.lineSeparator())
-                        .append("4. Find Bid by Id").append(System.lineSeparator())
-                        .append("5. Find Bids by name").append(System.lineSeparator())
-                        .append("6. Exit Program").append(System.lineSeparator())
                         .toString()));
 
     }

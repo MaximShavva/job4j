@@ -148,7 +148,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "Add new Item.";
+            return "Add new item.";
         }
     }
 
