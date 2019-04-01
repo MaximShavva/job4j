@@ -4,8 +4,8 @@ package ru.job4j.tracker;
  * Класс реализует интерфейс Input и эмулирует ввод данных пользователем.
  *
  * @author Шавва Максим.
- * @version 1
- * @since 29.03.2019г.
+ * @version 2
+ * @since 01.04.2019г.
  */
 public class StubInput implements Input {
     /**
@@ -45,8 +45,24 @@ public class StubInput implements Input {
         return this.value[this.position++];
     }
 
+    /**
+     * @param question Любой вопрос (не учитывается)
+     * @param range Правильные номера меню.
+     * @return "Введённый" пункт меню (в тестах не проверяем).
+     */
     @Override
     public int ask(String question, int[] range) {
-        return 0;
+        int result = Integer.valueOf(ask(question));
+        boolean missing = true;
+        for (int i :range) {
+            if (result == i) {
+                missing = false;
+                break;
+            }
+        }
+        if (missing) {
+            throw new MenuOutException("Ты ввел(а) неправильный пункт меню!");
+        }
+        return result;
     }
 }
