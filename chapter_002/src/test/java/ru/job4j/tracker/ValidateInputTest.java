@@ -55,7 +55,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("Не корректный номер. Попробуй ещё раз.%n")
+                        String.format("Некорректный номер. Попробуй ещё раз.%n")
                 )
         );
     }
