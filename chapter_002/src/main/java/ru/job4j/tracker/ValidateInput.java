@@ -33,7 +33,7 @@ public class ValidateInput implements Input {
      * в переданном методе input.ask.
      *
      * @param question Диалоговый вопрос пользователю
-     * @param range Массив номеров пунктов меню
+     * @param range    Массив номеров пунктов меню
      * @return выбранный пункт меню.
      */
     @Override
@@ -46,8 +46,6 @@ public class ValidateInput implements Input {
                 fault = false;
             } catch (MenuOutException moe) {
                 System.out.println(moe.getMessage());
-            } catch (NumberFormatException nfe) {
-                System.out.println("Не корректный номер. Попробуй ещё раз.");
             }
         } while (fault);
         return result;

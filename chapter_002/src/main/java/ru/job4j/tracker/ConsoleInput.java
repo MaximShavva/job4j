@@ -28,23 +28,29 @@ public class ConsoleInput implements Input {
     }
 
     /**
-     * @param question Диалоговый вопрос пользователю
-     * @param range Массив номеров пунктов меню
+     * @param question Диалоговый вопрос пользователю.
+     * @param range    Массив номеров пунктов меню.
      * @return выбранный пункт меню.
      */
     @Override
     public int ask(String question, int[] range) {
-        int result = Integer.valueOf(ask(question));
-        boolean missing = true;
-        for (int i :range) {
-            if (result == i) {
-                missing = false;
-                break;
-            }
+        String answer = ask(question);
+        validation(answer, range);
+        return Integer.valueOf(answer);
+    }
+
+    /**
+     * Валидация введённого пользователем значения.
+     *
+     * @param answer Строковый ответ пользоватея.
+     * @param range  Массив номеров пунктов меню.
+     */
+    private void validation(String answer, int[] range) {
+        if (!answer.matches("[0-9]+")) {
+            throw new MenuOutException("Некорректный номер. Попробуй ещё раз.");
         }
-        if (missing) {
+        if (!Arrays.toString(range).contains(answer)) {
             throw new MenuOutException("Ты ввел(а) неправильный пункт меню!");
         }
-        return result;
     }
 }
