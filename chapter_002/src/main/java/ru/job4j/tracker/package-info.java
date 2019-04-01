@@ -8,5 +8,7 @@
  * Класс StubInput - реализует интерфейс Input и эмулирует ввод данных пользователем.
  * Интерфейс UserAction определяет методы по работе с пользователем и с данными.
  * Класс MenuTracker обеспечивает работу меню приложения (трекера).
+ * Класс ValidateInput расширяет ConsoleInput.
+ * Класс MenuOutException расширяет RuntimeException
  */
 package ru.job4j.tracker;

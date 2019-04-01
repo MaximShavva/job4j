@@ -36,11 +36,17 @@ public class StubInput implements Input {
      * Как если бы мы симулировали поведение пользователя.
      * Для этого при каждом вызове метода ask мы увеличиваем счетчик и
      * при следующем вызове он вернет нам новое значение.
+     *
      * @param question не используется.
      * @return ответы формируются из заранее заданной последовательности.
      */
     @Override
     public String ask(String question) {
         return this.value[this.position++];
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        return 0;
     }
 }

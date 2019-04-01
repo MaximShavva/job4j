@@ -6,9 +6,11 @@ package ru.job4j.tracker;
  * для ввода данных к программе.
  *
  * @author Шавва Максим.
- * @version 1.
- * @since 28.03.2019г.
+ * @version 2.
+ * @since 01.04.2019г.
  */
 public interface Input {
     String ask(String question);
+
+    int ask(String question, int[] range);
 }

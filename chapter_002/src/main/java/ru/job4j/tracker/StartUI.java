@@ -1,11 +1,13 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 /**
  * Класс должен обеспечить полноценную работу всего приложения (трекера).
  *
  * @author Шавва Максим.
- * @version 2
- * @since 30.03.2019г.
+ * @version 3
+ * @since 01.04.2019г.
  */
 public class StartUI {
     /**
@@ -33,13 +35,29 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        ArrayList<Integer> range = new ArrayList<>();
         menu.fillActions();
+        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+            range.add(i);
+        }
         do {
             menu.show();
-            try {
-                menu.select(Integer.valueOf(input.ask("select:")));
-            } catch (NumberFormatException e){}
+            menu.select(input.ask("select:", convertIntegers(range)));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
+    }
+
+    /**
+     * Конвертируем список в массив
+     *
+     * @param integers список <Integer>
+     * @return массив int[]
+     */
+    public static int[] convertIntegers(ArrayList<Integer> integers) {
+        int[] ret = new int[integers.size()];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = integers.get(i);
+        }
+        return ret;
     }
 
     /**
@@ -47,6 +65,6 @@ public class StartUI {
      * @param args параметры консоли.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

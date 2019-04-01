@@ -127,6 +127,13 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * @return Предоставляет длинну списка actions
+     */
+    public int getActionsLentgh() {
+        return actions.size();
+    }
+
     private class AddItem implements UserAction {
         @Override
         public int key() {
