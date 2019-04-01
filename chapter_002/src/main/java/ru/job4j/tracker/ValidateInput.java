@@ -1,16 +1,36 @@
 package ru.job4j.tracker;
 
 /**
- * Класс расширяет ConsoleInput.
+ * Класс является "обёрткой" для классов, реализующих Input.
  *
  * @author Шавва Максим.
- * @version 1
+ * @version 2
  * @since 01.04.2019г.
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
 
     /**
-     * Переопределим ask так, чтобы он отлавливал неверный ввод пользователя.
+     * Воспользуемся шаблоном "Декоратор"
+     * Добавим переменную input, методы которой перепишем.
+     */
+    private final Input input;
+
+    public ValidateInput(final Input input) {
+        this.input = input;
+    }
+
+    /**
+     * @param question Вопрос, который нужно вывести на консоль.
+     * @return вернём строку, введённую с клавиатуры пользователем.
+     */
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
+
+    /**
+     * Переопределим ask так, чтобы он отлавливал неверный ввод пользователя
+     * в переданном методе input.ask.
      *
      * @param question Диалоговый вопрос пользователю
      * @param range Массив номеров пунктов меню
@@ -22,7 +42,7 @@ public class ValidateInput extends ConsoleInput {
         boolean fault = true;
         do {
             try {
-                result = super.ask(question, range);
+                result = this.input.ask(question, range);
                 fault = false;
             } catch (MenuOutException moe) {
                 System.out.println(moe.getMessage());

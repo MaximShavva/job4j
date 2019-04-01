@@ -4,8 +4,8 @@ package ru.job4j.tracker;
  * Класс реализует интерфейс Input и эмулирует ввод данных пользователем.
  *
  * @author Шавва Максим.
- * @version 1
- * @since 29.03.2019г.
+ * @version 2
+ * @since 01.04.2019г.
  */
 public class StubInput implements Input {
     /**
