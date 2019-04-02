@@ -21,6 +21,10 @@ public class StartUI {
     private final Tracker tracker;
 
     /**
+     * Флажок разрешения работы главного цикла.
+     */
+    private boolean working = true;
+    /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
@@ -31,19 +35,25 @@ public class StartUI {
     }
 
     /**
+     * изменяем флаг working на false
+     */
+    public void stop() {
+        this.working = false;
+    }
+    /**
      * Основой цикл программы.
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         ArrayList<Integer> range = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range.add(i);
         }
         do {
             menu.show();
             menu.select(input.ask("select:", convertIntegers(range)));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (working && !"y".equals(this.input.ask("Exit?(y): ")));
     }
 
     /**

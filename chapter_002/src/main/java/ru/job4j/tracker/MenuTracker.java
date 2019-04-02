@@ -35,6 +35,7 @@ public class MenuTracker {
     private static final String NEW = "------------ Новая заявка с ID: %s -----------%n";
     private static final String TABS = "%-15s %-24s %-16s%n";
     private static final String DATA = "----- Новые данные по заявке с Id: %s добавлены -----%n";
+
     /**
      * Константа меню для добавления новой заявки.
      */
@@ -71,13 +72,15 @@ public class MenuTracker {
     private static final String EXIT = "6";
 
     /**
-     * хранит ссылку на объект .
+     * хранит ссылку на объект.
      */
     private Input input;
+
     /**
-     * хранит ссылку на объект .
+     * хранит ссылку на объект.
      */
     private Tracker tracker;
+
     /**
      * хранит ссылку на массив типа UserAction.
      */
@@ -97,14 +100,14 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(Integer.parseInt(ADD), "Add new item."));
         this.actions.add(new ShowItems(Integer.parseInt(ALL), "Show all items."));
         this.actions.add(new UpdateItem(Integer.parseInt(EDIT), "Edit item."));
         this.actions.add(new DeleteItem(Integer.parseInt(DEL), "Delete item."));
         this.actions.add(new FindItemById(Integer.parseInt(ID), "Find item by Id."));
         this.actions.add(new FindItemsByName(Integer.parseInt(NAME), "Find items by name."));
-        this.actions.add(new ExitProgram(Integer.parseInt(EXIT), "Exit Program."));
+        this.actions.add(new ExitProgram(ui, Integer.parseInt(EXIT), "Exit Program."));
     }
 
     /**
@@ -284,16 +287,20 @@ public class MenuTracker {
     }
 
     private class ExitProgram extends BaseAction {
+        private final StartUI ui;
 
-        protected ExitProgram(int key, String name) {
+        protected ExitProgram(StartUI ui, int key, String name) {
             super(key, name);
+            this.ui = ui;
         }
 
         /**
-         * Дла выхода из программы не нужно ничего делать.
+         * Дла выхода из программы вызываем StartUI.stop().
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            ui.stop();
+            System.out.println("Пока!");
         }
     }
 }

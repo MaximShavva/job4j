@@ -28,6 +28,18 @@ public class StartUITest {
      * Поле содержит буфер для результата.
      */
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    /**
+     * Строка - меню пользователя.
+     */
+    private final String menu = new StringBuilder()
+            .append("0. Add new item.").append(System.lineSeparator())
+            .append("1. Show all items.").append(System.lineSeparator())
+            .append("2. Edit item.").append(System.lineSeparator())
+            .append("3. Delete item.").append(System.lineSeparator())
+            .append("4. Find item by Id.").append(System.lineSeparator())
+            .append("5. Find items by name.").append(System.lineSeparator())
+            .append("6. Exit Program.").append(System.lineSeparator())
+            .toString();
 
     /**
      * Присваиваем переменной System.out поток ByteArray.
@@ -127,13 +139,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(new StringBuilder()
-                        .append("0. Add new item.").append(System.lineSeparator())
-                        .append("1. Show all items.").append(System.lineSeparator())
-                        .append("2. Edit item.").append(System.lineSeparator())
-                        .append("3. Delete item.").append(System.lineSeparator())
-                        .append("4. Find item by Id.").append(System.lineSeparator())
-                        .append("5. Find items by name.").append(System.lineSeparator())
-                        .append("6. Exit Program.").append(System.lineSeparator())
+                        .append(menu)
                         .append("------------ Поиск заявки по ID: --------------")
                         .append(System.lineSeparator())
                         .append("Заявка:         Описание:                ID:")
@@ -141,6 +147,19 @@ public class StartUITest {
                         .append("test2           test desc 2              ")
                         .append(second.getId()).append("   ")
                         .append(System.lineSeparator())
+                        .toString()));
+
+    }
+
+    @Test
+    public void whenExitThenPoka() {
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[]{"6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(new StringBuilder()
+                        .append(menu)
+                        .append("Пока!").append(System.lineSeparator())
                         .toString()));
 
     }
