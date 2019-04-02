@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.singleton.Tracking;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -9,7 +11,7 @@ import java.util.Random;
  * @version 1.
  * @since 27.03.2019г.
  */
-public class Tracker {
+public class Tracker implements Tracking {
     private Item[] items = new Item[100];
     private int position = 0;
     private static final Random RN = new Random();

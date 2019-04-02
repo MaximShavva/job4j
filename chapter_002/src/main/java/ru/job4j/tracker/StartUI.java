@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import ru.job4j.tracker.singleton.*;
 
 /**
  * Класс должен обеспечить полноценную работу всего приложения (трекера).
@@ -18,7 +19,7 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private final Tracker tracker;
+    private final Tracking tracker;
 
     /**
      * Флажок разрешения работы главного цикла.
@@ -29,7 +30,7 @@ public class StartUI {
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracking tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -75,6 +76,6 @@ public class StartUI {
      * @param args параметры консоли.
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), TrackerEagerEnum.INSTANCE).init();
     }
 }

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.singleton.Tracking;
+
 import java.util.ArrayList;
 
 /**
@@ -79,7 +81,7 @@ public class MenuTracker {
     /**
      * хранит ссылку на объект.
      */
-    private Tracker tracker;
+    private Tracking tracker;
 
     /**
      * хранит ссылку на массив типа UserAction.
@@ -92,7 +94,7 @@ public class MenuTracker {
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracking tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -154,7 +156,7 @@ public class MenuTracker {
          * Метод реализует добавление новый заявки в хранилище.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(ADDITION);
             String name = input.ask(INPUTNAME.replace(BLANK, ""));
             String desc = input.ask(DESK.replace(BLANK, ""));
@@ -174,7 +176,7 @@ public class MenuTracker {
          * Метод показывает все заявки на данный момент.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(BIDS);
             System.out.println(DETAILS);
             for (Item item : tracker.findAll()) {
@@ -194,7 +196,7 @@ public class MenuTracker {
          * Метод редактирует заявку.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(EDITION);
             String id = input.ask(INPUTID);
             Item old = tracker.findById(id);
@@ -227,7 +229,7 @@ public class MenuTracker {
          * Метод удаляет заявку с указанным ID.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(DELETION);
             String id = input.ask(INPUTID);
             if (tracker.delete(id)) {
@@ -248,7 +250,7 @@ public class MenuTracker {
          * Метод находит заявку с указанным ID.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(FINDID);
             String id = input.ask(INPUTID);
             Item item = tracker.findById(id);
@@ -271,7 +273,7 @@ public class MenuTracker {
          * Метод находит все заявки с указанным именем.
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             System.out.println(FINDNAME);
             String name = input.ask(INPUTNAME.replace(BLANK, ""));
             Item[] items = tracker.findByName(name);
@@ -298,7 +300,7 @@ public class MenuTracker {
          * Дла выхода из программы вызываем StartUI.stop().
          */
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracking tracker) {
             ui.stop();
             System.out.println("Пока!");
         }
