@@ -35,6 +35,7 @@ public class MenuTracker {
     private static final String NEW = "------------ Новая заявка с ID: %s -----------%n";
     private static final String TABS = "%-15s %-24s %-16s%n";
     private static final String DATA = "----- Новые данные по заявке с Id: %s добавлены -----%n";
+
     /**
      * Константа меню для добавления новой заявки.
      */
@@ -71,13 +72,15 @@ public class MenuTracker {
     private static final String EXIT = "6";
 
     /**
-     * хранит ссылку на объект .
+     * хранит ссылку на объект.
      */
     private Input input;
+
     /**
-     * хранит ссылку на объект .
+     * хранит ссылку на объект.
      */
     private Tracker tracker;
+
     /**
      * хранит ссылку на массив типа UserAction.
      */
@@ -97,14 +100,21 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
-        this.actions.add(new AddItem());
-        this.actions.add(new ShowItems());
-        this.actions.add(new UpdateItem());
-        this.actions.add(new DeleteItem());
-        this.actions.add(new FindItemById());
-        this.actions.add(new FindItemsByName());
-        this.actions.add(new ExitProgram());
+    public void fillActions(StartUI ui) {
+        this.actions.add(new AddItem(Integer.parseInt(ADD), "Add new item."));
+        this.actions.add(new ShowItems(Integer.parseInt(ALL), "Show all items."));
+        this.actions.add(new UpdateItem(Integer.parseInt(EDIT), "Edit item."));
+        this.actions.add(new DeleteItem(Integer.parseInt(DEL), "Delete item."));
+        this.actions.add(new FindItemById(Integer.parseInt(ID), "Find item by Id."));
+        this.actions.add(new FindItemsByName(Integer.parseInt(NAME), "Find items by name."));
+        this.actions.add(new ExitProgram(ui, Integer.parseInt(EXIT), "Exit Program."));
+    }
+
+    /**
+     * @param action добавляем в список.
+     */
+    public void addAction(UserAction action) {
+        actions.add(action);
     }
 
     /**
@@ -134,10 +144,10 @@ public class MenuTracker {
         return actions.size();
     }
 
-    private class AddItem implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(ADD);
+    private class AddItem extends BaseAction {
+
+        protected AddItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -152,17 +162,12 @@ public class MenuTracker {
             tracker.add(item);
             System.out.printf(NEW, item.getId());
         }
-
-        @Override
-        public String info() {
-            return "Add new item.";
-        }
     }
 
-    private class ShowItems implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(ALL);
+    private class ShowItems extends BaseAction {
+
+        protected ShowItems(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -177,17 +182,12 @@ public class MenuTracker {
             }
             System.out.println(END);
         }
-
-        @Override
-        public String info() {
-            return "Show all items.";
-        }
     }
 
-    private class UpdateItem implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(EDIT);
+    private class UpdateItem extends BaseAction {
+
+        protected UpdateItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -215,17 +215,12 @@ public class MenuTracker {
                 System.out.printf(DATA, id);
             }
         }
-
-        @Override
-        public String info() {
-            return "Edit item.";
-        }
     }
 
-    private class DeleteItem implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(DEL);
+    private class DeleteItem extends BaseAction {
+
+        protected DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -241,17 +236,12 @@ public class MenuTracker {
                 System.out.println(NOID);
             }
         }
-
-        @Override
-        public String info() {
-            return "Delete item.";
-        }
     }
 
-    private class FindItemById implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(ID);
+    private class FindItemById extends BaseAction {
+
+        protected FindItemById(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -269,17 +259,12 @@ public class MenuTracker {
                 System.out.println(NOID);
             }
         }
-
-        @Override
-        public String info() {
-            return "Find item by Id.";
-        }
     }
 
-    private class FindItemsByName implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(NAME);
+    private class FindItemsByName extends BaseAction {
+
+        protected FindItemsByName(int key, String name) {
+            super(key, name);
         }
 
         /**
@@ -299,29 +284,23 @@ public class MenuTracker {
                 }
             }
         }
-
-        @Override
-        public String info() {
-            return "Find items by name.";
-        }
     }
 
-    private class ExitProgram implements UserAction {
-        @Override
-        public int key() {
-            return Integer.parseInt(EXIT);
+    private class ExitProgram extends BaseAction {
+        private final StartUI ui;
+
+        protected ExitProgram(StartUI ui, int key, String name) {
+            super(key, name);
+            this.ui = ui;
         }
 
         /**
-         * Дла выхода из программы не нужно ничего делать.
+         * Дла выхода из программы вызываем StartUI.stop().
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-        }
-
-        @Override
-        public String info() {
-            return "Exit Program.";
+            ui.stop();
+            System.out.println("Пока!");
         }
     }
 }
