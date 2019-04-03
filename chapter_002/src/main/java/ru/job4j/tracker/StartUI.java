@@ -45,9 +45,10 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        MenuTracker menu = new MenuTracker(this, this.input, this.tracker);
+        menu.setMenu(new String[]{"add", "show", "update", "delete", "id", "name", "exit"});
+        menu.fillActions();
         ArrayList<Integer> range = new ArrayList<>();
-        menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range.add(i);
         }
