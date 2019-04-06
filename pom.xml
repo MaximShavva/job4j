@@ -14,6 +14,7 @@
     <modules>
        <module>chapter_001</module>
 	   <module>puzzle</module>
+	   <module>chess</module>
 		<module>chapter_002</module>
 	</modules>
 	<build>
@@ -38,7 +39,7 @@
                     </execution>
                 </executions>
 				<configuration>
-                    <mainClass>ru.job4j.puzzle.Puzzle</mainClass>
+                    <mainClass>ru.job4j.chess.Chess</mainClass>
                 </configuration>
             </plugin>
             <plugin>
