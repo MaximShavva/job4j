@@ -10,5 +10,7 @@
  * Класс MenuTracker обеспечивает работу меню приложения (трекера).
  * Класс ValidateInput является обёрткой Input-реализующих классов.
  * Класс MenuOutException расширяет RuntimeException
+ * Класс - фабрика MenuFactory. Реализует методы по созданию UserAction-generic объектов.
+ * Интерфейс CreateActions - объявляет методы по созданию UserAction-generic объектов.
  */
 package ru.job4j.tracker;
