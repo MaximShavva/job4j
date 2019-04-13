@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс содержит метод по преобразованию двумерного
- * массива в список ArrayList.
+ * Класс содержит методы:
+ * - по преобразованию двумерного массива в список ArrayList.
+ * - по преобразованию списка массивов в один список всех данных.
  *
  * @author Шавва Максим.
  * @version 1.
@@ -24,5 +25,14 @@ public class ConvertMatrix2List {
             }
         }
         return list;
+    }
+
+    /**
+     * @param list список массивов int[].
+     * @return список всех данных из list.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        int[][] array = list.toArray(new int[list.size()][]);
+        return toList(array);
     }
 }

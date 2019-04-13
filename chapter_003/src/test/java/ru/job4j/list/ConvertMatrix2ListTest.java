@@ -1,8 +1,11 @@
 package ru.job4j.list;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -15,7 +18,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ConvertMatrix2ListTest {
     /**
-     * Тестируем преобразование массива 2х2.
+     * Тестируем преобразование массива 2х2 методом toList().
      */
     @Test
     public void when2on2ArrayThenList4() {
@@ -28,6 +31,19 @@ public class ConvertMatrix2ListTest {
                 1, 2, 3, 4
         );
         List<Integer> result = list.toList(input);
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * Тестируем преобразование списка 2x массивов
+     * в список из всех данных методом convert.
+     */
+    @Test
+    public void when2ArraysThenList() {
+        ConvertMatrix2List convertList = new ConvertMatrix2List();
+        List<int[]> input = new ArrayList<>(Arrays.asList(new int[]{1, 2}, new int[]{3, 4, 5}));
+        List<Integer> result = convertList.convert(input);
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5);
         assertThat(result, is(expect));
     }
 }
