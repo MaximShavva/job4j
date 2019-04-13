@@ -2,6 +2,8 @@ package ru.job4j.tracker.singleton;
 
 import ru.job4j.tracker.Item;
 
+import java.util.List;
+
 /**
  * Устанавливает методы взаимодействия с "базой данных" заявок.
  *
@@ -33,7 +35,7 @@ public interface Tracking {
      * @param key имя-ключ, по поторому делаем выборку заявок.
      * @return выборка заявок по имени.
      */
-    Item[] findByName(String key);
+    List<Item> findByName(String key);
 
     /**
      * @param id передаём id  заявки, которую хотим получить.
@@ -44,5 +46,5 @@ public interface Tracking {
     /**
      * @return получаем все заявки, которые есть на данный момент.
      */
-    Item[] findAll();
+    List<Item> findAll();
 }

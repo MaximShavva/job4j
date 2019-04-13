@@ -2,18 +2,19 @@ package ru.job4j.tracker;
 
 import ru.job4j.tracker.singleton.Tracking;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Класс - хранилище заявок Item с реализацией CRUD
  * @author Шавва Максим.
- * @version 1.
- * @since 27.03.2019г.
+ * @version 1.1
+ * @since 13.04.2019г.
  */
 public class Tracker implements Tracking {
-    private Item[] items = new Item[100];
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
     private static final Random RN = new Random();
 
     /**
@@ -22,7 +23,7 @@ public class Tracker implements Tracking {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -34,7 +35,7 @@ public class Tracker implements Tracking {
         boolean result = false;
         int index = findPositionById(id);
         if (index != -1) {
-            System.arraycopy(items, index + 1, items, index, --position - index);
+            items.remove(index);
             result = true;
         }
         return result;
@@ -50,7 +51,7 @@ public class Tracker implements Tracking {
         int index = findPositionById(id);
         if (index != -1) {
             item.setId(id);
-            items[index] = item;
+            items.set(index, item);
             result = true;
         }
         return result;
@@ -60,15 +61,14 @@ public class Tracker implements Tracking {
      * @param key имя-ключ, по поторому делаем выборку заявок.
      * @return выборка заявок по имени.
      */
-    public Item[] findByName(String key) {
-        Item[] finded = new Item[position];
-        int index = 0;
-        for (int i = 0; i != position; i++) {
-            if (items[i] != null && items[i].getName().equals(key)) {
-                finded[index++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> finded = new ArrayList<>();
+        for (Item item :items) {
+            if (key.equals(item.getName())) {
+                finded.add(item);
             }
         }
-        return Arrays.copyOf(finded, index);
+        return finded;
     }
 
     /**
@@ -89,8 +89,8 @@ public class Tracker implements Tracking {
     /**
      * @return получаем все заявки, которые есть на данный момент.
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(items, position);
+    public List<Item> findAll() {
+        return items;
     }
 
     /**
@@ -98,8 +98,8 @@ public class Tracker implements Tracking {
      * @return позиция в списке.*/
     private int findPositionById(String id) {
         int result = -1;
-        for (int i = 0; i != position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
+        for (int i = 0; i != items.size(); i++) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
                 result = i;
                 break;
             }
