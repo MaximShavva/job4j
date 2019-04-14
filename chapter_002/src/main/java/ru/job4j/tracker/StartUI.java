@@ -1,14 +1,16 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import ru.job4j.tracker.singleton.*;
 
 /**
  * Класс должен обеспечить полноценную работу всего приложения (трекера).
  *
  * @author Шавва Максим.
- * @version 3
- * @since 01.04.2019г.
+ * @version 3.1
+ * @since 13.04.2019г.
  */
 public class StartUI {
     /**
@@ -46,7 +48,7 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this, this.input, this.tracker);
-        menu.setMenu(new String[]{"add", "show", "update", "delete", "id", "name", "exit"});
+        menu.setMenu(Arrays.asList("add", "show", "update", "delete", "id", "name", "exit"));
         menu.fillActions();
         ArrayList<Integer> range = new ArrayList<>();
         for (int i = 0; i < menu.getActionsLentgh(); i++) {

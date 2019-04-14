@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import ru.job4j.tracker.singleton.Tracking;
 
+import java.util.List;
+
 /**
  * Класс - фабрика объектов. Содержит методы по созданию UserAction-generic объектов.
  *
@@ -11,8 +13,8 @@ import ru.job4j.tracker.singleton.Tracking;
  * по работе с данными.
  *
  * @author Шавва Максим.
- * @version 1
- * @since 03.04.2019г.
+ * @version 1.1
+ * @since 13.04.2019г.
  */
 public class MenuFactory implements CreateActions {
     /**
@@ -239,8 +241,8 @@ public class MenuFactory implements CreateActions {
         public void execute(Input input, Tracking tracker) {
             System.out.println(FINDNAME);
             String name = input.ask(INPUTNAME.replace(BLANK, ""));
-            Item[] items = tracker.findByName(name);
-            if (items.length == 0) {
+            List<Item> items = tracker.findByName(name);
+            if (items.size() == 0) {
                 System.out.println(NONAME);
             } else {
                 System.out.println(DETAILS);

@@ -3,13 +3,14 @@ package ru.job4j.tracker;
 import ru.job4j.tracker.singleton.Tracking;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс обеспечивает работу меню приложения (трекера).
  *
  * @author Шавва Максим.
- * @version 2
- * @since 03.04.2019г.
+ * @version 2.1
+ * @since 13.04.2019г.
  */
 public class MenuTracker {
     /**
@@ -35,7 +36,7 @@ public class MenuTracker {
     /**
      * Хранит массив элементов меню, которые нам нужны.
      */
-    private String[] menu;
+    private List<String> menu;
 
     /**
      * Конструктор.
@@ -53,7 +54,7 @@ public class MenuTracker {
     /**
      * Задаёт массив элементов меню, которые нам нужны.
      */
-    public void setMenu(String[] menu) {
+    public void setMenu(List<String> menu) {
         this.menu = menu;
     }
 
@@ -61,28 +62,28 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        for (int i = 0; i != menu.length; i++) {
-            switch (menu[i]) {
+        for (String item: menu) {
+            switch (item) {
                 case "add":
-                    actions.add(factory.AddItemCreate(i));
+                    actions.add(factory.AddItemCreate(actions.size()));
                     break;
                 case "show":
-                    actions.add(factory.ShowItemsCreate(i));
+                    actions.add(factory.ShowItemsCreate(actions.size()));
                     break;
                 case "update":
-                    actions.add(factory.UpdateItemCreate(i));
+                    actions.add(factory.UpdateItemCreate(actions.size()));
                     break;
                 case "delete":
-                    actions.add(factory.DeleteItemCreate(i));
+                    actions.add(factory.DeleteItemCreate(actions.size()));
                     break;
                 case "id":
-                    actions.add(factory.FindItemByIdCreate(i));
+                    actions.add(factory.FindItemByIdCreate(actions.size()));
                     break;
                 case "name":
-                    actions.add(factory.FindItemsByNameCreate(i));
+                    actions.add(factory.FindItemsByNameCreate(actions.size()));
                     break;
                 case "exit":
-                    actions.add(factory.ExitProgramCreate(i));
+                    actions.add(factory.ExitProgramCreate(actions.size()));
                     break;
             }
         }

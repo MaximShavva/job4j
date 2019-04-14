@@ -3,13 +3,15 @@ package ru.job4j.tracker.singleton;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.List;
+
 /**
  * Класс - синглтон, декоратор для класса Tracker.
  * Тип - ленивый синглтон на статическом поле.
  *
  * @author Шавва Максим.
- * @version 1.
- * @since 02.04.2019г.
+ * @version 1.1
+ * @since 13.04.2019г.
  */
 public class TrackerLazyField implements Tracking {
 
@@ -69,7 +71,7 @@ public class TrackerLazyField implements Tracking {
      * @param key имя-ключ, по поторому делаем выборку заявок.
      * @return выборка заявок по имени.
      */
-    public Item[] findByName(String key) {
+    public List<Item> findByName(String key) {
         return tracker.findByName(key);
     }
 
@@ -84,7 +86,7 @@ public class TrackerLazyField implements Tracking {
     /**
      * @return получаем все заявки, которые есть на данный момент.
      */
-    public Item[] findAll() {
+    public List<Item> findAll() {
         return tracker.findAll();
     }
 }
