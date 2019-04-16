@@ -1,4 +1,4 @@
-package ru.job4j.testTask.varb;
+package ru.job4j.testtask.varc;
 
 import org.junit.Test;
 
@@ -6,24 +6,24 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Класс тестирует метод joinArrays класа Merge.
+ * Класс тестирует метод joinArrays класа Fusion.
  *
  * @author Шавва Максим (masyam@mail.ru)
- * @version 2
- * @since 25.03.2019
+ * @version 3
+ * @since 27.03.2019
  */
-public class MergeTest {
+public class FusionTest {
 
     /**
      * тест возрастающих массивов, 1 короче.
      */
     @Test
     public void whenFirstShorterThenJointArray() {
-        Merge composer = new Merge();
-        int[] arrA = {1, 3, 4, 6};
-        int[] arrB = {1, 2, 3, 8, 9};
+        Fusion composer = new Fusion();
+        int[] a = {1, 3, 4, 6};
+        int[] b = {1, 2, 3, 8, 9};
         int[] result = {1, 1, 2, 3, 3, 4, 6, 8, 9};
-        int[] actual = composer.joinArrays(arrA, arrB);
+        int[] actual = composer.joinArrays(a, b);
         assertThat(actual, is(result));
     }
 
@@ -32,11 +32,11 @@ public class MergeTest {
      */
     @Test
     public void whenFirstLongerThenJointArray() {
-        Merge composer = new Merge();
-        int[] arrA = {1, 2, 3, 5, 7};
-        int[] arrB = {1, 3, 4};
+        Fusion composer = new Fusion();
+        int[] a = {1, 2, 3, 5, 7};
+        int[] b = {1, 3, 4};
         int[] result = {1, 1, 2, 3, 3, 4, 5, 7};
-        int[] actual = composer.joinArrays(arrA, arrB);
+        int[] actual = composer.joinArrays(a, b);
         assertThat(actual, is(result));
     }
 
@@ -45,11 +45,11 @@ public class MergeTest {
      */
     @Test
     public void whenArrays1ItemThenJointArray() {
-        Merge composer = new Merge();
-        int[] arrA = {4};
-        int[] arrB = {6};
+        Fusion composer = new Fusion();
+        int[] a = {4};
+        int[] b = {6};
         int[] result = {4, 6};
-        int[] actual = composer.joinArrays(arrA, arrB);
+        int[] actual = composer.joinArrays(a, b);
         assertThat(actual, is(result));
     }
 
@@ -58,11 +58,11 @@ public class MergeTest {
      */
     @Test
     public void whenHasBlankArrayThenJointArray() {
-        Merge composer = new Merge();
-        int[] arrA = {4, 6};
-        int[] arrB = {};
+        Fusion composer = new Fusion();
+        int[] a = {4, 6};
+        int[] b = {};
         int[] result = {4, 6};
-        int[] actual = composer.joinArrays(arrA, arrB);
+        int[] actual = composer.joinArrays(a, b);
         assertThat(actual, is(result));
     }
 }

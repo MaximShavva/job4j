@@ -1,14 +1,14 @@
-package ru.job4j.testTask.varb;
+package ru.job4j.testtask.varc;
 
 /**
  * Объединение 2-х отсортированных по возрастанию массивов типа int
  * в общий отсортированный массив.
  *
  * @author Шавва Максим.
- * @version 2.
- * @since 25.03.2019г.
+ * @version 3.
+ * @since 27.03.2019г.
  */
-public class Merge {
+public class Fusion {
 
     /**
      * @param first  Первый массив.
@@ -19,14 +19,10 @@ public class Merge {
         int[] joint = new int[first.length + second.length];
         int left = 0, right = 0;
         for (int i = 0; i < joint.length; i++) {
-            if (left == first.length) {
+            if (left == first.length || (right != second.length && first[left] > second[right])) {
                 joint[i] = second[right++];
-            } else if (right == second.length) {
+            } else if (right == second.length || first[left] <= second[right]) {
                 joint[i] = first[left++];
-            } else if (first[left] <= second[right]) {
-                joint[i] = first[left++];
-            } else {
-                joint[i] = second[right++];
             }
         }
         return joint;

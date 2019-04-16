@@ -1,4 +1,4 @@
-package ru.job4j.testTask;
+package ru.job4j.testtask;
 
 /**
  * Объединение 2-х отсортированных по возрастанию массивов типа int

@@ -1,4 +1,4 @@
-package ru.job4j.testTask.vara;
+package ru.job4j.testtask.vara;
 
 import java.util.function.BiPredicate;
 
@@ -60,10 +60,14 @@ public class Joint {
         if ((left == 1 && right == 1)
                 || (left == 2 && right == 2)
                 || (left == 2 && right == 1)
-                || (left == 1 && right == 2)) vector = 1;
+                || (left == 1 && right == 2)) {
+            vector = 1;
+        }
         if ((left == -1 && right == -1)
                 || (left == 2 && right == -1)
-                || (left == -1 && right == 2)) vector = -1;
+                || (left == -1 && right == 2)) {
+            vector = -1;
+        }
         return vector;
     }
 
@@ -79,9 +83,15 @@ public class Joint {
         if (array.length > 1) {
             boolean inc = increase(array);
             boolean dec = decrease(array);
-            if (inc && !dec) sorted = 1;
-            if (!inc && dec) sorted = -1;
-            if (inc && dec) sorted = 2;
+            if (inc && !dec) {
+                sorted = 1;
+            }
+            if (!inc && dec) {
+                sorted = -1;
+            }
+            if (inc && dec) {
+                sorted = 2;
+            }
         } else {
             sorted = 1;
         }

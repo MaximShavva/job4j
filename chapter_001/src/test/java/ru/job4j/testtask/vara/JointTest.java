@@ -1,4 +1,4 @@
-package ru.job4j.testTask.vara;
+package ru.job4j.testtask.vara;
 
 import org.junit.Test;
 

@@ -27,7 +27,9 @@ public class Counter {
             f = start;
         }
         for (int i = s; i <= f; i++) {
-            if (i % 2 == 0) sum += i;
+            if (i % 2 == 0) {
+                sum += i;
+            }
         }
         return sum;
     }

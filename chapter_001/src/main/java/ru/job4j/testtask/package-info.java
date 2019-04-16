@@ -3,4 +3,4 @@
  * Класс MergeArrays - объединение 2-х отсортированных по возрастанию массивов типа int
  * в общий отсортированный массив.
  */
-package ru.job4j.testTask;
+package ru.job4j.testtask;
