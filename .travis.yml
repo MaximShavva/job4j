@@ -7,6 +7,14 @@ language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
+jdk:
+- openjdk11
+- openjdk-ea
+
+matrix:
+  allow_failures:
+  - jdk: openjdk-ea
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
