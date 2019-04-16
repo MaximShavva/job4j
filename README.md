@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/MaximShavva/job4j.svg?branch=master)](https://travis-ci.org/MaximShavva/job4j)
+[![codecov](https://codecov.io/gh/MaximShavva/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/MaximShavva/job4j)
+
 # Репозиторий Шавва Максима
 
 Я прохожу обучение по курсу Job4j (Сайт http://job4j.ru/).
