@@ -26,10 +26,6 @@ public class Chess extends Application {
     private final int size = 8;
     private final Logic logic = new Logic();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     private Rectangle buildRectangle(int x, int y, int size, boolean white) {
         Rectangle rect = new Rectangle();
         rect.setX(x * size);
