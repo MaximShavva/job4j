@@ -62,28 +62,30 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        for (String item: menu) {
+        for (String item : menu) {
             switch (item) {
                 case "add":
-                    actions.add(factory.AddItemCreate(actions.size()));
+                    actions.add(factory.addItemCreate(actions.size()));
                     break;
                 case "show":
-                    actions.add(factory.ShowItemsCreate(actions.size()));
+                    actions.add(factory.showItemsCreate(actions.size()));
                     break;
                 case "update":
-                    actions.add(factory.UpdateItemCreate(actions.size()));
+                    actions.add(factory.updateItemCreate(actions.size()));
                     break;
                 case "delete":
-                    actions.add(factory.DeleteItemCreate(actions.size()));
+                    actions.add(factory.deleteItemCreate(actions.size()));
                     break;
                 case "id":
-                    actions.add(factory.FindItemByIdCreate(actions.size()));
+                    actions.add(factory.findItemByIdCreate(actions.size()));
                     break;
                 case "name":
-                    actions.add(factory.FindItemsByNameCreate(actions.size()));
+                    actions.add(factory.findItemsByNameCreate(actions.size()));
                     break;
                 case "exit":
-                    actions.add(factory.ExitProgramCreate(actions.size()));
+                    actions.add(factory.exitProgramCreate(actions.size()));
+                    break;
+                default:
                     break;
             }
         }

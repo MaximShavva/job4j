@@ -28,7 +28,9 @@ public class StringsCompare implements Comparator<String> {
                 break;
             }
         }
-        if (result == 0) result = Integer.compare(first.length, second.length);
+        if (result == 0) {
+            result = Integer.compare(first.length, second.length);
+        }
         return result;
     }
 }

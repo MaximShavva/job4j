@@ -53,7 +53,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия add.
      */
     @Override
-    public UserAction AddItemCreate(int position) {
+    public UserAction addItemCreate(int position) {
         return new AddItem(position, "Add new item.");
     }
 
@@ -62,7 +62,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия add.
      */
     @Override
-    public UserAction ShowItemsCreate(int position) {
+    public UserAction showItemsCreate(int position) {
         return new ShowItems(position, "Show all items.");
     }
 
@@ -71,7 +71,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия update.
      */
     @Override
-    public UserAction UpdateItemCreate(int position) {
+    public UserAction updateItemCreate(int position) {
         return new UpdateItem(position, "Edit item.");
     }
 
@@ -80,7 +80,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия delete.
      */
     @Override
-    public UserAction DeleteItemCreate(int position) {
+    public UserAction deleteItemCreate(int position) {
         return new DeleteItem(position, "Delete item.");
     }
 
@@ -89,7 +89,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия Find Items By ID.
      */
     @Override
-    public UserAction FindItemByIdCreate(int position) {
+    public UserAction findItemByIdCreate(int position) {
         return new FindItemById(position, "Find item by Id.");
     }
 
@@ -98,7 +98,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия Find Items By Name.
      */
     @Override
-    public UserAction FindItemsByNameCreate(int position) {
+    public UserAction findItemsByNameCreate(int position) {
         return new FindItemsByName(position, "Find items by name.");
     }
 
@@ -107,7 +107,7 @@ public class MenuFactory implements CreateActions {
      * @return реализайия действия Exit.
      */
     @Override
-    public UserAction ExitProgramCreate(int position) {
+    public UserAction exitProgramCreate(int position) {
         return new ExitProgram(ui, position, "Exit Program.");
     }
 

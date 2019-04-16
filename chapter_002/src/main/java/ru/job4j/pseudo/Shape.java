@@ -7,6 +7,6 @@ package ru.job4j.pseudo;
  * @version 1
  * @since 29.03.2019г.
  */
-public interface Shape{
+public interface Shape {
     String draw();
 }

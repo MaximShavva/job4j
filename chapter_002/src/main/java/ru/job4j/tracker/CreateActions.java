@@ -9,11 +9,17 @@ package ru.job4j.tracker;
  * @since 03.04.2019г.
  */
 public interface CreateActions {
-    UserAction AddItemCreate(int position);
-    UserAction ShowItemsCreate(int position);
-    UserAction UpdateItemCreate(int position);
-    UserAction DeleteItemCreate(int position);
-    UserAction FindItemByIdCreate(int position);
-    UserAction FindItemsByNameCreate(int position);
-    UserAction ExitProgramCreate(int position);
+    UserAction addItemCreate(int position);
+
+    UserAction showItemsCreate(int position);
+
+    UserAction updateItemCreate(int position);
+
+    UserAction deleteItemCreate(int position);
+
+    UserAction findItemByIdCreate(int position);
+
+    UserAction findItemsByNameCreate(int position);
+
+    UserAction exitProgramCreate(int position);
 }

@@ -28,7 +28,8 @@ public class TrackerEagerField implements Tracking {
     /**
      * Конструктор скрыт от пользователя класса.
      */
-    private TrackerEagerField() {}
+    private TrackerEagerField() {
+    }
 
     /**
      * @return Возвращает синглетон.

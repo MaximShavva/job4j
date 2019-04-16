@@ -20,13 +20,14 @@ public class TrackerLazyClass implements Tracking {
      */
     private static final class Holder {
         private static final TrackerLazyClass INSTANCE = new TrackerLazyClass();
-        private static final Tracker tracker = new Tracker();
+        private static final Tracker TRACKER = new Tracker();
     }
 
     /**
      * Конструктор скрыт от пользователя класса.
      */
-    private TrackerLazyClass() {}
+    private TrackerLazyClass() {
+    }
 
     /**
      * @return Возвращает синглетон.
@@ -40,7 +41,7 @@ public class TrackerLazyClass implements Tracking {
      * @return объект item cо своим id
      */
     public Item add(Item item) {
-        return Holder.tracker.add(item);
+        return Holder.TRACKER.add(item);
     }
 
     /**
@@ -48,7 +49,7 @@ public class TrackerLazyClass implements Tracking {
      * @return если удаление успешно - true/
      */
     public boolean delete(String id) {
-        return Holder.tracker.delete(id);
+        return Holder.TRACKER.delete(id);
     }
 
     /**
@@ -57,7 +58,7 @@ public class TrackerLazyClass implements Tracking {
      * @return если замена произошла успешно, true.
      */
     public boolean replace(String id, Item item) {
-        return Holder.tracker.replace(id, item);
+        return Holder.TRACKER.replace(id, item);
     }
 
     /**
@@ -65,7 +66,7 @@ public class TrackerLazyClass implements Tracking {
      * @return выборка заявок по имени.
      */
     public List<Item> findByName(String key) {
-        return Holder.tracker.findByName(key);
+        return Holder.TRACKER.findByName(key);
     }
 
     /**
@@ -73,13 +74,13 @@ public class TrackerLazyClass implements Tracking {
      * @return получение заявки по id.
      */
     public Item findById(String id) {
-        return Holder.tracker.findById(id);
+        return Holder.TRACKER.findById(id);
     }
 
     /**
      * @return получаем все заявки, которые есть на данный момент.
      */
     public List<Item> findAll() {
-        return Holder.tracker.findAll();
+        return Holder.TRACKER.findAll();
     }
 }

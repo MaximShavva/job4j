@@ -114,22 +114,14 @@ public class WayTests {
     @Test(expected = ImpossibleMoveException.class)
     public void whenRookMovesThen() throws ImpossibleMoveException {
         Figure rook = new RookWhite(Cell.D4);
-        Cell[] H4 = rook.way(Cell.D4, Cell.H4);
-        Cell[] D8 = rook.way(Cell.D4, Cell.D8);
-        Cell[] A4 = rook.way(Cell.D4, Cell.A4);
-        Cell[] D1 = rook.way(Cell.D4, Cell.D1);
-        Cell[] E5 = rook.way(Cell.D4, Cell.E5);
-        Cell[] C5 = rook.way(Cell.D4, Cell.C5);
-        Cell[] E3 = rook.way(Cell.D4, Cell.E3);
-        Cell[] C3 = rook.way(Cell.D4, Cell.C3);
-        assertThat(H4, is(new Cell[]{Cell.E4, Cell.F4, Cell.G4, Cell.H4}));
-        assertThat(D8, is(new Cell[]{Cell.D5, Cell.D6, Cell.D7, Cell.D8}));
-        assertThat(A4, is(new Cell[]{Cell.C4, Cell.B4, Cell.A4}));
-        assertThat(D1, is(new Cell[]{Cell.D3, Cell.D2, Cell.D1}));
-        assertThat(E5.length, is(0));
-        assertThat(C5.length, is(0));
-        assertThat(E3.length, is(0));
-        assertThat(C3.length, is(0));
+        assertThat(rook.way(Cell.D4, Cell.H4), is(new Cell[]{Cell.E4, Cell.F4, Cell.G4, Cell.H4}));
+        assertThat(rook.way(Cell.D4, Cell.D8), is(new Cell[]{Cell.D5, Cell.D6, Cell.D7, Cell.D8}));
+        assertThat(rook.way(Cell.D4, Cell.A4), is(new Cell[]{Cell.C4, Cell.B4, Cell.A4}));
+        assertThat(rook.way(Cell.D4, Cell.D1), is(new Cell[]{Cell.D3, Cell.D2, Cell.D1}));
+        assertThat(rook.way(Cell.D4, Cell.E5).length, is(0));
+        assertThat(rook.way(Cell.D4, Cell.C5).length, is(0));
+        assertThat(rook.way(Cell.D4, Cell.E3).length, is(0));
+        assertThat(rook.way(Cell.D4, Cell.C3).length, is(0));
     }
 
     /**
@@ -138,22 +130,14 @@ public class WayTests {
     @Test(expected = ImpossibleMoveException.class)
     public void whenBishopMovesThen() throws ImpossibleMoveException {
         Figure bishop = new BishopBlack(Cell.D4);
-        Cell[] A1 = bishop.way(Cell.D4, Cell.A1);
-        Cell[] H8 = bishop.way(Cell.D4, Cell.H8);
-        Cell[] A7 = bishop.way(Cell.D4, Cell.A7);
-        Cell[] G1 = bishop.way(Cell.D4, Cell.G1);
-        Cell[] D5 = bishop.way(Cell.D4, Cell.D5);
-        Cell[] C4 = bishop.way(Cell.D4, Cell.C4);
-        Cell[] D3 = bishop.way(Cell.D4, Cell.D3);
-        Cell[] E4 = bishop.way(Cell.D4, Cell.E4);
-        assertThat(A1, is(new Cell[]{Cell.C3, Cell.B2, Cell.A1}));
-        assertThat(H8, is(new Cell[]{Cell.E5, Cell.F6, Cell.G7, Cell.H8}));
-        assertThat(A7, is(new Cell[]{Cell.C5, Cell.B6, Cell.A7}));
-        assertThat(G1, is(new Cell[]{Cell.E3, Cell.F2, Cell.G1}));
-        assertThat(D5.length, is(0));
-        assertThat(C4.length, is(0));
-        assertThat(D3.length, is(0));
-        assertThat(E4.length, is(0));
+        assertThat(bishop.way(Cell.D4, Cell.A1), is(new Cell[]{Cell.C3, Cell.B2, Cell.A1}));
+        assertThat(bishop.way(Cell.D4, Cell.H8), is(new Cell[]{Cell.E5, Cell.F6, Cell.G7, Cell.H8}));
+        assertThat(bishop.way(Cell.D4, Cell.A7), is(new Cell[]{Cell.C5, Cell.B6, Cell.A7}));
+        assertThat(bishop.way(Cell.D4, Cell.G1), is(new Cell[]{Cell.E3, Cell.F2, Cell.G1}));
+        assertThat(bishop.way(Cell.D4, Cell.D5).length, is(0));
+        assertThat(bishop.way(Cell.D4, Cell.C4).length, is(0));
+        assertThat(bishop.way(Cell.D4, Cell.D3).length, is(0));
+        assertThat(bishop.way(Cell.D4, Cell.E4).length, is(0));
     }
 
     /**
