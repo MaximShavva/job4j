@@ -21,15 +21,15 @@ public class UserConvert {
 
         @Override
         public String toString() {
-            return "User{" +
-                    "name='" + name + '\'' +
-                    '}';
+            return "User{"
+                    + "name='" + name + '\''
+                    + '}';
         }
     }
 
     /**
      * @param names Принимает список имён, из которых сделаем спасок объектов.
-     * @param op Функциональный интерфейс, куда подставим конструктор.
+     * @param op    Функциональный интерфейс, куда подставим конструктор.
      * @return Список объектов User.
      */
     public List<User> convert(List<String> names, Function<String, User> op) {

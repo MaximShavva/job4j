@@ -20,7 +20,7 @@ public class SchoolTest {
      * Список студентов будем использовать в методах по тестированию
      * School.collect().
      */
-    private static final List<Student> students = List.of(
+    private static final List<Student> STUDENTS = List.of(
             new Student("Arkadij", 98),
             new Student("Phedor", 63),
             new Student("Michail", 77),
@@ -34,7 +34,7 @@ public class SchoolTest {
     @Test
     public void when0To50ThenGroupC() {
         School school = new School();
-        List<Student> low = school.collect(students,
+        List<Student> low = school.collect(STUDENTS,
                 student -> student.getScore() >= 0 && student.getScore() < 51);
         assertThat(low.toString(), is(List.of(new Student("Eugen", 45),
                 new Student("Daniel", 46)).toString()));
@@ -46,7 +46,7 @@ public class SchoolTest {
     @Test
     public void when51To70ThenGroupB() {
         School school = new School();
-        List<Student> low = school.collect(students,
+        List<Student> low = school.collect(STUDENTS,
                 student -> student.getScore() > 50 && student.getScore() < 71);
         assertThat(low.toString(),
                 is(List.of(new Student("Phedor", 63)).toString()));
@@ -58,7 +58,7 @@ public class SchoolTest {
     @Test
     public void when71To100ThenGroupA() {
         School school = new School();
-        List<Student> low = school.collect(students,
+        List<Student> low = school.collect(STUDENTS,
                 student -> student.getScore() > 70 && student.getScore() <= 100);
         assertThat(low.toString(), is(List.of(new Student("Arkadij", 98),
                 new Student("Michail", 77)).toString()));
