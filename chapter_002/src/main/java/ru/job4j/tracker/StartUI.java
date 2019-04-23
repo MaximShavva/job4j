@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 import ru.job4j.tracker.singleton.*;
 
@@ -24,6 +25,12 @@ public class StartUI {
     private final Tracking tracker;
 
     /**
+     * Интерфейс используется для вывода на консоль либо
+     * для записи в буфер с помощью лямбда-подстановки.
+     */
+    private final Consumer<String> output;
+
+    /**
      * Флажок разрешения работы главного цикла.
      */
     private boolean working = true;
@@ -32,9 +39,10 @@ public class StartUI {
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracking tracker) {
+    public StartUI(Input input, Tracking tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -47,11 +55,11 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(this, this.input, this.tracker);
+        MenuTracker menu = new MenuTracker(this, this.input, this.tracker, output);
         menu.setMenu(Arrays.asList("add", "show", "update", "delete", "id", "name", "exit"));
         menu.fillActions();
         ArrayList<Integer> range = new ArrayList<>();
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+        for (int i = 0; i < menu.getActionsLength(); i++) {
             range.add(i);
         }
         do {
@@ -79,6 +87,6 @@ public class StartUI {
      * @param args параметры консоли.
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), TrackerEagerEnum.INSTANCE).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), TrackerEagerEnum.INSTANCE, System.out::println).init();
     }
 }

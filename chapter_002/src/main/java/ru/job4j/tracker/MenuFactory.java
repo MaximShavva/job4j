@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import ru.job4j.tracker.singleton.Tracking;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Класс - фабрика объектов. Содержит методы по созданию UserAction-generic объектов.
@@ -35,17 +36,24 @@ public class MenuFactory implements CreateActions {
     private static final String FINDID = "------------ Поиск заявки по ID: --------------";
     private static final String FINDNAME = "------------ Поиск заявки по имени: --------------";
     private static final String DETAILS = "Заявка:         Описание:                ID:";
-    private static final String NEW = "------------ Новая заявка с ID: %s -----------%n";
-    private static final String TABS = "%-15s %-24s %-16s%n";
-    private static final String DATA = "----- Новые данные по заявке с Id: %s добавлены -----%n";
+    private static final String NEW = "------------ Новая заявка с ID: %s -----------";
+    private static final String TABS = "%-15s %-24s %-16s";
+    private static final String DATA = "----- Новые данные по заявке с Id: %s добавлены -----";
 
     /**
      * Ссылка на наш основной класс программы.
      */
     private StartUI ui;
 
-    public MenuFactory(StartUI ui) {
+    /**
+     * Интерфейс используется для вывода на консоль либо
+     * для записи в буфер с помощью лямбда-подстановки.
+     */
+    private final Consumer<String> output;
+
+    public MenuFactory(StartUI ui, Consumer<String> output) {
         this.ui = ui;
+        this.output = output;
     }
 
     /**
@@ -122,12 +130,12 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(ADDITION);
+            output.accept(ADDITION);
             String name = input.ask(INPUTNAME.replace(BLANK, ""));
             String desc = input.ask(DESK.replace(BLANK, ""));
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.printf(NEW, item.getId());
+            output.accept(String.format(NEW, item.getId()));
         }
     }
 
@@ -142,12 +150,12 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(BIDS);
-            System.out.println(DETAILS);
+            output.accept(BIDS);
+            output.accept(DETAILS);
             for (Item item : tracker.findAll()) {
-                System.out.printf(TABS, item.getName(), item.getDecs(), item.getId());
+                output.accept(String.format(TABS, item.getName(), item.getDecs(), item.getId()));
             }
-            System.out.println(END);
+            output.accept(END);
         }
     }
 
@@ -162,11 +170,11 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(EDITION);
+            output.accept(EDITION);
             String id = input.ask(INPUTID);
             Item old = tracker.findById(id);
             if (old == null) {
-                System.out.println(NOID);
+                output.accept(NOID);
                 return;
             }
             String name = input.ask(INPUTNAME);
@@ -179,7 +187,7 @@ public class MenuFactory implements CreateActions {
             }
             Item item = new Item(name, desc);
             if (tracker.replace(id, item)) {
-                System.out.printf(DATA, id);
+                output.accept(String.format(DATA, id));
             }
         }
     }
@@ -195,12 +203,12 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(DELETION);
+            output.accept(DELETION);
             String id = input.ask(INPUTID);
             if (tracker.delete(id)) {
-                System.out.println(DELETED);
+                output.accept(DELETED);
             } else {
-                System.out.println(NOID);
+                output.accept(NOID);
             }
         }
     }
@@ -216,14 +224,14 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(FINDID);
+            output.accept(FINDID);
             String id = input.ask(INPUTID);
             Item item = tracker.findById(id);
             if (item != null) {
-                System.out.println(DETAILS);
-                System.out.printf(TABS, item.getName(), item.getDecs(), item.getId());
+                output.accept(DETAILS);
+                output.accept(String.format(TABS, item.getName(), item.getDecs(), item.getId()));
             } else {
-                System.out.println(NOID);
+                output.accept(NOID);
             }
         }
     }
@@ -239,15 +247,15 @@ public class MenuFactory implements CreateActions {
          */
         @Override
         public void execute(Input input, Tracking tracker) {
-            System.out.println(FINDNAME);
+            output.accept(FINDNAME);
             String name = input.ask(INPUTNAME.replace(BLANK, ""));
             List<Item> items = tracker.findByName(name);
             if (items.size() == 0) {
-                System.out.println(NONAME);
+                output.accept(NONAME);
             } else {
-                System.out.println(DETAILS);
+                output.accept(DETAILS);
                 for (Item item : items) {
-                    System.out.printf(TABS, item.getName(), item.getDecs(), item.getId());
+                    output.accept(String.format(TABS, item.getName(), item.getDecs(), item.getId()));
                 }
             }
         }
@@ -267,7 +275,7 @@ public class MenuFactory implements CreateActions {
         @Override
         public void execute(Input input, Tracking tracker) {
             ui.stop();
-            System.out.println("Пока!");
+            output.accept("Пока!");
         }
     }
 }
