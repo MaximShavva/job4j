@@ -4,6 +4,7 @@ import ru.job4j.tracker.singleton.Tracking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Класс обеспечивает работу меню приложения (трекера).
@@ -34,6 +35,12 @@ public class MenuTracker {
     private ArrayList<UserAction> actions = new ArrayList<>();
 
     /**
+     * Интерфейс используется для вывода на консоль либо
+     * для записи в буфер с помощью лямбда-подстановки.
+     */
+    private final Consumer<String> output;
+
+    /**
      * Хранит массив элементов меню, которые нам нужны.
      */
     private List<String> menu;
@@ -45,10 +52,11 @@ public class MenuTracker {
      * @param input   объект типа Input.
      * @param tracker объект типа Tracker.
      */
-    public MenuTracker(StartUI ui, Input input, Tracking tracker) {
+    public MenuTracker(StartUI ui, Input input, Tracking tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
-        this.factory = new MenuFactory(ui);
+        this.factory = new MenuFactory(ui, output);
+        this.output = output;
     }
 
     /**
@@ -107,7 +115,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.printf("%s. %s%n", action.key(), action.info());
+                output.accept(String.format("%s. %s", action.key(), action.info()));
             }
         }
     }
@@ -115,7 +123,7 @@ public class MenuTracker {
     /**
      * @return Предоставляет длинну списка actions
      */
-    public int getActionsLentgh() {
+    public int getActionsLength() {
         return actions.size();
     }
 }
