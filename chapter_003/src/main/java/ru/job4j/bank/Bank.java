@@ -3,6 +3,7 @@ package ru.job4j.bank;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Класс отвечает за хранение учётных записей клиентов банка.
@@ -89,19 +90,13 @@ public class Bank {
      * @return счёт клиента.
      */
     private Account findAccount(String passport, String requisite) {
-        Account result = null;
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                for (Account account : users.get(user)) {
-                    if (account.getReqs().equals(requisite)) {
-                        result = account;
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-        return result;
+        List<Account> result = users.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .flatMap(user -> users.get(user).stream())
+                .filter(account -> account.getReqs().equals(requisite))
+                .distinct()
+                .collect(Collectors.toList());
+        return result.get(0);
     }
 
     @Override
