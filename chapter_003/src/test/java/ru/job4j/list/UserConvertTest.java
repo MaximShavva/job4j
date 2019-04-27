@@ -21,12 +21,10 @@ public class UserConvertTest {
     @Test
     public void whenListThenMap() {
         UserConvert convert = new UserConvert();
-        List<User> list = new ArrayList<>(Arrays.asList(
+        List<User> list = List.of(
                 new User(17, "Ivan Ivanov", "Moscow"),
-                new User(26, "Klim Sidorov", "Urupinsk")));
-        HashMap<Integer, User> expect = new HashMap<>();
-        expect.put(17, list.get(0));
-        expect.put(26, list.get(1));
+                new User(26, "Klim Sidorov", "Urupinsk"));
+        Map<Integer, User> expect = Map.of(17, list.get(0), 26, list.get(1));
         assertThat(convert.process(list), is(expect));
     }
 }

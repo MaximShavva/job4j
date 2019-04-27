@@ -41,4 +41,8 @@ public class PriorityQueue {
     public Task take() {
         return this.tasks.poll();
     }
+
+    public int getSize() {
+        return tasks.size();
+    }
 }

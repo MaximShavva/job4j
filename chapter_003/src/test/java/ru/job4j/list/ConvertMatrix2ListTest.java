@@ -23,13 +23,8 @@ public class ConvertMatrix2ListTest {
     @Test
     public void when2on2ArrayThenList4() {
         ConvertMatrix2List list = new ConvertMatrix2List();
-        int[][] input = {
-                {1, 2},
-                {3, 4}
-        };
-        List<Integer> expect = Arrays.asList(
-                1, 2, 3, 4
-        );
+        int[][] input = {{1, 2},{3, 4}};
+        List<Integer> expect = List.of(1, 2, 3, 4);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -41,9 +36,9 @@ public class ConvertMatrix2ListTest {
     @Test
     public void when2ArraysThenList() {
         ConvertMatrix2List convertList = new ConvertMatrix2List();
-        List<int[]> input = new ArrayList<>(Arrays.asList(new int[]{1, 2}, new int[]{3, 4, 5}));
+        List<int[]> input = List.of(new int[]{1, 2}, new int[]{3, 4, 5});
         List<Integer> result = convertList.convert(input);
-        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> expect = List.of(1, 2, 3, 4, 5);
         assertThat(result, is(expect));
     }
 }

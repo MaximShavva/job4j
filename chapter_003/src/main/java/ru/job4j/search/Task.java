@@ -1,5 +1,7 @@
 package ru.job4j.search;
 
+import java.util.Objects;
+
 /**
  * Класс "Задание".
  *
@@ -35,5 +37,30 @@ public class Task {
      */
     public int getPriority() {
         return priority;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task task = (Task) o;
+        return priority == task.priority
+                && Objects.equals(desc, task.desc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(desc, priority);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{"
+                + "desc='" + desc + '\''
+                + ", priority=" + priority + '}';
     }
 }
