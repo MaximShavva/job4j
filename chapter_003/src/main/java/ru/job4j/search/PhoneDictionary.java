@@ -31,8 +31,8 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
-        Iterator<Person> iter = persons.iterator();
+        var result = new ArrayList<Person>();
+        var iter = persons.iterator();
         iter.forEachRemaining(person -> {
             if (person.getName().contains(key)
                     || person.getSurname().contains(key)

@@ -8,8 +8,8 @@ import java.util.ListIterator;
  * Класс представляет собой очередь с приоритетом.
  *
  * @author Шавва Максим.
- * @version 1.
- * @since 12.04.2019г.
+ * @version 1.1
+ * @since 27.04.2019г.
  */
 public class PriorityQueue {
     /**
@@ -24,8 +24,8 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        int index = 0;
-        for (Task item : tasks) {
+        var index = 0;
+        for (var item : tasks) {
             if (task.getPriority() > item.getPriority()) {
                 index++;
             }
